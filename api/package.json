@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "SHROUD (Synthetic Human, Radiation OUtput Determined)",
+  "main": "nodemon api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r dotenv/config api.js"
+  },
+  "author": "Web Terminators",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.13",
+    "nodemon": "^1.18.4"
+  }
+}
