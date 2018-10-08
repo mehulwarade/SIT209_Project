@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V9</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/login_util.css">
+	<link rel="stylesheet" type="text/css" href="css/login_main.css">
+<!--===============================================================================================-->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+
+<style type="text/css">
+			#customBtn {
+			  font-size: 25px;
+			  color: #3b5998;
+
+			  display: -webkit-box;
+			  display: -webkit-flex;
+			  display: -moz-box;
+			  display: -ms-flexbox;
+			  display: flex;
+			  justify-content: center;
+			  align-items: center;
+			  width: 50px;
+			  height: 50px;
+			  border-radius: 50%;
+			  background-color: #fff;
+			  margin: 5px;
+			  box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1);
+			  -moz-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1);
+			  -webkit-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1);
+			  -o-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1);
+			  -ms-box-shadow: 0 5px 20px 0px rgba(0, 0, 0, 0.1);
+			}
+			#customBtn:hover {
+			  cursor: pointer;
+			}
+			span.label {
+			  font-family: serif;
+			  font-weight: normal;
+			}
+			
+</style>
+
+</head>
+<body>
+		<script>
+				//#region Google
+				var googleUser = {};
+				var startApp = function() {
+		  	gapi.load('auth2', function(){
+				// Retrieve the singleton for the GoogleAuth library and set up the client.
+				auth2 = gapi.auth2.init({
+			  client_id: '1039617107215-le5qpc5utp78mt2audaoorht0lkhqr96.apps.googleusercontent.com',
+			  cookiepolicy: 'single_host_origin',
+			  // Request scopes in addition to 'profile' and 'email'
+			  //scope: 'additional_scope'
+			});
+			attachSignin(document.getElementById('customBtn'));
+		  });
+		};
+	  
+		function attachSignin(element) {
+		  auth2.attachClickHandler(element, {},
+			  function(googleUser) {
+					console.log("Signed in: " +	googleUser.getBasicProfile().getName());
+					localStorage.setItem('user', googleUser.getBasicProfile().getName());		
+			  }, function(error) {
+				alert(JSON.stringify(error, undefined, 2));
+			  });
+		}
+				//#endregion
+
+				//#region FB LOGIN
+				window.fbAsyncInit = function() {
+                  FB.init({
+                    appId      : '239816713331603',
+                    cookie     : true,  // enable cookies to allow the server to access 
+                                        // the session
+                    xfbml      : true,  // parse social plugins on this page
+                    version    : 'v2.8' // use graph api version 2.8
+                  });                              
+                };
+
+                (function(d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s); js.id = id;
+                  js.src = "https://connect.facebook.net/en_US/sdk.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+                
+                function fb_log(){						
+                  FB.login(function(response) {
+                    if (response.authResponse) {
+                    console.log('Welcome!  Fetching your information.... ');
+                    FB.api('/me', function(response) {
+												 console.log('Good to see you, ' + response.name);
+												 localStorage.setItem('user', response.name);												 
+                    });
+                    } else {
+                        console.log('User cancelled login or did not fully authorize.');
+                      }
+                  });
+                }
+				
+				//#endregion
+		</script>		
+
+<div class="container-login100" style="background-image: url('images/bg-02.jpg');">
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-40 p-b-30">
+			<div class="login100-form validate-form">
+				<span class="login100-form-title p-b-37">
+					Sign In <br> (SHROUD account)
+				</span>
+
+				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+					<input class="input100" type="text" name="username" placeholder="username or email" id="log_name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input m-b-25" data-validate = "Enter password">
+					<input class="input100" type="password" name="pass" placeholder="password" id="log_password">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn" id="login">
+						Sign In
+					</button>
+				</div>
+
+				<div class="text-center p-t-30 p-b-20">
+					<span class="txt1">
+						Or login with
+					</span>
+				</div>
+
+
+				<div class="flex-c p-b-30">
+					<a class="login100-social-item" onclick="fb_log()">
+						<i class="fa fa-facebook-f"></i>
+					</a>
+
+					<div id="gSignInWrapper">            
+							<div id="customBtn" class="customGPlusSignIn">
+								<img src="images/icons/icon-google.png">							  
+							</div>
+					</div>
+				</div>
+
+					
+				<div class="text-center">
+					<a href="/shroud.html#t3" target="_parent" >						
+						Sign Up
+					</a>
+				</div>	
+			</div>			
+		</div>
+	</div>
+
+	<div id="dropDownSelect1"></div>	
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+<script src="https://apis.google.com/js/api:client.js"></script>
+	<script>startApp();</script>
+	<script src="app.js"></script>
+	
+</body>
+</html>
