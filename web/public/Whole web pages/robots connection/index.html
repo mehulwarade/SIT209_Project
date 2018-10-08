@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Intermediate</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="css/bootstrap.css">
+			<link rel="stylesheet" href="css/main.css">
+			
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+			<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css'>
+		</head>
+		<body>	
+				<style>
+						z{
+							color: white;													
+						}
+						.container {
+								position: relative;
+						}
+						/* Bottom right text */
+						.text-block {
+							position: absolute;
+							top: 8cm;
+							background-color: black;
+							color: black;
+							padding-right: 2cm;
+							padding-left: 0.5cm;
+						}
+				</style>
+			<!-- start banner Area -->
+			<section class="banner-area" id="home">
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-top">
+						<div class="banner-content col-lg-6 col-md-1">
+							<h1>You're almost there!<br></h1>
+							<p class="text-white text-uppercase">
+								Select which robot you want to connect to:
+							</p>
+							<a class="primary-btn header-btn text-uppercase" onclick="SHROUD()">SHROUD</a>
+							<a href="#" class="primary-btn header-btn text-uppercase" onclick="Ruby()">Ruby</a>
+							<a href="#" class="primary-btn header-btn text-uppercase" onclick="Aries()">Aries</a>
+
+							<p class="text-white">
+									We will attempt to connect to your preferred robot. If the connection is successfull then you will be redirected automatically.
+							</p>
+							
+							<div class="text-block">
+									<br><z id="messege1"><i class="icon fa fa-spinner fa-spin" style="color:white"></i> Is the robot online?</z>
+									<br><z id="messege2"><i class="icon fa fa-spinner fa-spin" style="color:white"></i> Checking the connection to the robot.</z>
+									<br><z id="messege3"><i class="icon fa fa-spinner fa-spin" style="color:white"></i> Checking all the sensors and their connections.</z>
+									<br><z id="messege4"><i class="icon fa fa-spinner fa-spin" style="color:white"></i> Checking the connections to the temperature and humidity sensor.</z>
+									<br><z id="messege5"><i class="icon fa fa-spinner fa-spin" style="color:white"></i> Checking the external power source and the motors.</z>
+									
+							</div>
+						</div>
+						<div class="banner-img col-lg-6 col-md-6">
+							<img class="img-fluid" src="img/banner-img.png" alt="">
+						</div>												
+					</div>
+				</div>
+			</section>
+
+			<script src="js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="js/vendor/bootstrap.min.js"></script>						
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"> </script>
+		
+			<script src="js/main.js"></script>	
+		</body>
+	</html>
+
+
+<script>
+function SHROUD(){
+	document.getElementById("messege1").innerHTML = '<i class="icon fa fa fa-check-square" style="color:white"></i> Robot is online.';
+	document.getElementById("messege2").innerHTML = '<i class="icon fa fa fa-check-square" style="color:white"></i> The conenction to robot is strong.';
+	document.getElementById("messege3").innerHTML = '<i class="icon fa fa fa-check-square" style="color:white"></i> The ultrasonic sensors are live and broadcasting.';
+	document.getElementById("messege4").innerHTML = '<i class="icon fa fa fa-check-square" style="color:white"></i> Temperature and humidity sensor is working and transmitting perfectly.';
+	document.getElementById("messege5").innerHTML = '<i class="icon fa fa fa-check-square" style="color:white"></i> The external source is strong and the mottors can move.';
+	window.open('/control.html','_parent');
+}
+
+function Ruby(){
+	document.getElementById("messege1").innerHTML = '<i class="icon fa fa fa-exclamation-triangle" style="color:white"></i> Error! Robot is offline.';
+	document.getElementById("messege2").innerHTML = '<i class="icon fa fa fa-exclamation-triangle" style="color:white"></i> Please choose another robot.';
+	document.getElementById("messege3").innerHTML = '';
+	document.getElementById("messege4").innerHTML = '';
+	document.getElementById("messege5").innerHTML = '';
+}
+
+function Aries(){
+	document.getElementById("messege1").innerHTML = '<i class="icon fa fa fa-exclamation-triangle" style="color:white"></i> Error! Robot is offline.';
+	document.getElementById("messege2").innerHTML = '<i class="icon fa fa fa-exclamation-triangle" style="color:white"></i> Please choose another robot.';
+	document.getElementById("messege3").innerHTML = '';
+	document.getElementById("messege4").innerHTML = '';
+	document.getElementById("messege5").innerHTML = '';
+}
+</script>
